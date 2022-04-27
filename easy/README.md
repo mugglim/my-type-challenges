@@ -35,3 +35,11 @@ type Foo<T> = {
 	[K in keyof Foo]-?: T[K];
 };
 ```
+
+## Generics
+
+#### Check array is empty
+
+```ts
+type Empty<T extends any[]> = T extends [] ? true : false;
+```
