@@ -33,15 +33,15 @@ type T2 = 'World';
 type T3 = `${T1} ${T2}`; // Hello World
 
 // with union types
-type T1 = 'A' | 'B';
-type T2 = 'C' | 'D';
+type T4 = 'A' | 'B';
+type T5 = 'C' | 'D';
 
-type T3 = `{${T1},${T2}}`; // "{A,C}" | "{A,D}" | "{B,C}" | "{B,D}"
+type T6 = `{${T1},${T2}}`; // "{A,C}" | "{A,D}" | "{B,C}" | "{B,D}"
 
 // trim right
 type TrimRight<T extends string> = T extends `${infer R} ` ? TrimRight<R> : T;
 
-type T = TrimRight<'Hello World   '>;
+type trimed = TrimRight<'Hello World   '>;
 
 // replace
 type Replace<
