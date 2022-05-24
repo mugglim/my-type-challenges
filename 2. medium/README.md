@@ -1,4 +1,4 @@
-## Generics
+# Medium
 
 ```ts
 // default generic value

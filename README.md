@@ -4,6 +4,12 @@
 
 - [type-challenges](https://github.com/type-challenges/type-challenges) 문제를 풀며 타입스크립트를 익히자.
 
+## Problems
+
+- [Easy](./easy/README.md)
+- [Medium](./medium/README.md)
+- [Hard](./hard/README.md)
+
 ## Ref.
 
 - https://github.com/type-challenges/type-challenges
@@ -11,3 +17,4 @@
 - https://joshua1988.github.io/ts/
 - https://rossbulat.medium.com/typescript-conditionals-explained-a096591f3ac0
 - https://learntypescript.dev/
+- https://heropy.blog/2020/01/27/typescript/
