@@ -1,62 +1,33 @@
 # 2-Medium
 
+### [2. Get Return Type](https://github.com/type-challenges/type-challenges/blob/main/questions/00002-medium-return-type/README.md)
+
+<details>
+<summary>정리</summary>
+  
+ - [ReturnType\<T\>](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#returntypetype)의 개념을 학습하자.
+ - 컴파일 시점의 [typeof](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html) 연산자가 어떤 역할을 하는지 학습하자
+   - ✅ typeof는 컴파일과 런타임 시점에 모두 사용할 수 있다.
+
 ```ts
-// default generic value
-type MyG<T, K = keyof T> = {
-	//..
+type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+```
+
+</details>
+
+### [3. Omit](https://github.com/type-challenges/type-challenges/blob/main/questions/00003-medium-omit/README.md)
+
+<details>
+<summary>정리</summary>
+ 
+ - 제네릭에서 [extends](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)의 의미를 학습하자.
+
+```ts
+type Exclude<T, K> = T extends K ? never : T;
+
+type MyOmit<T, K extends keyof T> = {
+	[key in Exclude<keyof T, K>]: T[key];
 };
 ```
 
-## `infer` with rest parameters
-
-- `4.0` 이후의 버전 부터 전개 연산자는 마지막에 위치 하지 않아도 된다.
-
-```ts
-// T ? true : false (Head can be empty array)
-type CanSplit<T extends any[]> = T extends [...infer Head, infer Tail]
-	? true
-	: false;
-```
-
-## Template literal Types
-
-- TypeScript 4.1 부터 사용할 수 있다.
-- JavaScript의 template literal을 사용하여 타입을 쉽게 선언할 수 있다.
-
-#### e.g.
-
-```ts
-// simple e.g.
-type T1 = 'Hello';
-type T2 = 'World';
-
-type T3 = `${T1} ${T2}`; // Hello World
-
-// with union types
-type T4 = 'A' | 'B';
-type T5 = 'C' | 'D';
-
-type T6 = `{${T1},${T2}}`; // "{A,C}" | "{A,D}" | "{B,C}" | "{B,D}"
-
-// trim right
-type TrimRight<T extends string> = T extends `${infer R} ` ? TrimRight<R> : T;
-
-type trimed = TrimRight<'Hello World   '>;
-
-// replace
-type Replace<
-	S extends string,
-	From extends string,
-	To extends string,
-> = From extends ''
-	? S
-	: S extends `${infer S1}${From}${infer S2}`
-	? `${S1}${To}${S2}`
-	: S;
-
-type replaced = Replace<'types are fun!', 'fun', 'awesome'>; // expected to be 'types are awesome!'
-```
-
-#### Ref
-
-- https://toss.tech/article/template-literal-types
+</details>
