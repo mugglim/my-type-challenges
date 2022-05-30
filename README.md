@@ -6,9 +6,9 @@
 
 ## Problems
 
-- [Easy](./easy/README.md)
-- [Medium](./medium/README.md)
-- [Hard](./hard/README.md)
+- [1-Easy](./1-easy/README.md)
+- [2-Medium](./2-medium/README.md)
+- [3-Hard](./3-hard/README.md)
 
 ## Ref.
 

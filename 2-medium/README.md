@@ -1,4 +1,4 @@
-# Medium
+# 2-Medium
 
 ```ts
 // default generic value
