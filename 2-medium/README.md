@@ -31,3 +31,46 @@ type MyOmit<T, K extends keyof T> = {
 ```
 
 </details>
+
+### [8. Readonly 2](https://github.com/type-challenges/type-challenges/blob/main/questions/00008-medium-readonly-2/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Exclude<T, K> = T extends K ? never : T;
+
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+	readonly [key in K]: T[key];
+} & { [key in Exclude<keyof T, K>]: T[key] };
+```
+
+</details>
+
+### [9. Deep Readonly](https://github.com/type-challenges/type-challenges/blob/main/questions/00009-medium-deep-readonly/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+// // keyof empty object is never e.g) keyof {} = never
+type DeepReadonly<T> = {
+	readonly [key in keyof T]: keyof T[key] extends never
+		? T[key]
+		: DeepReadonly<T[key]>;
+};
+```
+
+</details>
+
+### [10.Tuple to Union](https://github.com/type-challenges/type-challenges/blob/main/questions/00010-medium-tuple-to-union/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+// T[number] returns all types of T (if T is array)
+type TupleToUnion<T extends unknown[]> = T[number];
+```
+
+</details>
