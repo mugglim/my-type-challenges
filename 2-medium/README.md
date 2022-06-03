@@ -74,3 +74,59 @@ type TupleToUnion<T extends unknown[]> = T[number];
 ```
 
 </details>
+
+### [15. Last of Array](https://github.com/type-challenges/type-challenges/blob/main/questions/00015-medium-last/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Last<T extends any[]> = T extends [...infer Head, infer Tail]
+	? Tail
+	: never;
+```
+
+</details>
+
+### [16. Pop](https://github.com/type-challenges/type-challenges/blob/main/questions/00016-medium-pop/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Pop<T extends any[]> = T extends [...infer Head, infer Tail]
+	? [...Head]
+	: never;
+```
+
+</details>
+
+### [20. Promise.all](https://github.com/type-challenges/type-challenges/blob/main/questions/00020-medium-promise-all/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+declare function PromiseAll<T extends unknown[]>(
+	values: readonly [...T],
+): Promise<{
+	[key in keyof T]: T[key] extends Promise<infer R> ? R : T[key];
+}>;
+```
+
+</details>
+
+### [62. Type Lookup](https://github.com/type-challenges/type-challenges/blob/main/questions/00062-medium-type-lookup/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type LookUp<U extends { type: string }, T extends U['type']> = U extends {
+	type: T;
+}
+	? U
+	: never;
+```
+
+</details>
