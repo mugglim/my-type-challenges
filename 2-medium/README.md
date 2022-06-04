@@ -219,3 +219,38 @@ type ReplaceAll<
 ```
 
 </details>
+
+### [191.Append Argument](https://github.com/type-challenges/type-challenges/blob/main/questions/00191-medium-append-argument/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type AppendArgument<Fn extends (...args: any[]) => any, A> = Fn extends (
+	...args: infer Args
+) => infer R
+	? (...args: [...Args, A]) => R
+	: never;
+```
+
+</details>
+
+### [298. Length of String](https://github.com/type-challenges/type-challenges/blob/main/questions/00298-medium-length-of-string/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+// if T extends string, T['length'] is number type and isn't length of string
+type LengthOfArray<T extends unknown[]> = T['length'];
+
+// recursively convert string to array recursively
+// e.g) "Foo" => ["F", ...["o", ...["o"]]] => ["F","o","o"]
+type StringToArray<T extends string> = T extends `${infer Head}${infer Tail}`
+	? [Head, ...StringToArray<Tail>]
+	: [];
+
+type LengthOfString<S extends string> = LengthOfArray<StringToArray<S>>;
+```
+
+</details>
