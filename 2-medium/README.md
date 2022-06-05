@@ -254,3 +254,18 @@ type LengthOfString<S extends string> = LengthOfArray<StringToArray<S>>;
 ```
 
 </details>
+
+### [459. Flatten](https://github.com/type-challenges/type-challenges/blob/main/questions/00459-medium-flatten/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Flatten<T extends unknown[]> = T extends [infer Head, ...infer Rest]
+	? Head extends unknown[]
+		? [...Flatten<Head>, ...Flatten<Rest>]
+		: [Head, ...Flatten<Rest>]
+	: [];
+```
+
+</details>
