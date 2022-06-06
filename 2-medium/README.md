@@ -269,3 +269,39 @@ type Flatten<T extends unknown[]> = T extends [infer Head, ...infer Rest]
 ```
 
 </details>
+
+### [527. Append to object](https://github.com/type-challenges/type-challenges/blob/main/questions/00527-medium-append-to-object/README.md)
+
+- 문자열 제네릭 타입을 인덱스 시그니처로 사용하는 방법을 익히자.
+- [Typescript: How to use a generic parameter as object key](https://stackoverflow.com/questions/56419558/typescript-how-to-use-a-generic-parameter-as-object-key)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type AppendToObject<T extends object, U extends string, V extends unknown> = {
+	[key in keyof T | U]: key extends keyof T ? T[key] : V;
+};
+```
+
+</details>
+
+### [529. Absolute](https://github.com/type-challenges/type-challenges/blob/main/questions/00529-medium-absolute/README.md)
+
+- ✅ `Bigint.toString()`은 `Number.toString()`과 동일하게 동작한다.
+
+```js
+1024n.toString(); // "1024"
+1111_1111_111n.toString(); // "11111111111"
+```
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer R}`
+	? R
+	: `${T}`;
+```
+
+</details>
