@@ -305,3 +305,33 @@ type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer R}`
 ```
 
 </details>
+
+### [531. String to Union](https://github.com/type-challenges/type-challenges/blob/main/questions/00531-medium-string-to-union/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type StringToUnion<T extends string> = T extends `${infer Head}${infer Rest}`
+	? Head | StringToUnion<Rest>
+	: never;
+```
+
+</details>
+
+### [599. Merge](https://github.com/type-challenges/type-challenges/blob/main/questions/00599-medium-merge/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Merge<F extends object, S extends object> = {
+	[key in keyof F | keyof S]: key extends keyof S
+		? S[key]
+		: key extends keyof F
+		? F[key]
+		: never;
+};
+```
+
+</details>
