@@ -335,3 +335,36 @@ type Merge<F extends object, S extends object> = {
 ```
 
 </details>
+
+### [612. KebabCase](https://github.com/type-challenges/type-challenges/blob/main/questions/00612-medium-kebabcase/README.md)
+
+- [Capitalize\<StringType>](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#capitalizestringtype)과 [Uncapitalize\<StringType>](https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#uncapitalizestringtype)을 활용해보자.
+
+<details>
+<summary>정리</summary>
+
+```ts
+type KebabCase<S extends string> = S extends `${infer Head}${infer Rest}`
+	? Rest extends Uncapitalize<Rest>
+		? `${Uncapitalize<Head>}${KebabCase<Rest>}`
+		: `${Uncapitalize<Head>}-${KebabCase<Rest>}`
+	: S;
+```
+
+</details>
+
+### [645. Diff](https://github.com/type-challenges/type-challenges/blob/main/questions/00645-medium-diff/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+// prettier-ignore
+type Diff<O extends object, O1 extends object> = {
+	[key in | Exclude<keyof O, keyof O1> | Exclude<keyof O1, keyof O>]: key extends keyof O
+		? O[key] 
+		: key extends keyof O1 ? O1[key]: never;
+};
+```
+
+</details>
