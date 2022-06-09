@@ -368,3 +368,58 @@ type Diff<O extends object, O1 extends object> = {
 ```
 
 </details>
+
+### [949. AnyOf](https://github.com/type-challenges/type-challenges/blob/main/questions/00949-medium-anyof/README.md)
+
+- 빈 배열, 빈 객체를 어떻게 처리할지 고민해보자.
+
+<details>
+<summary>정리</summary>
+
+- `never[]`은 빈 배열을 의미한다.
+- `{[key:string]:never}`은 빈 객체를 의미한다.
+
+```ts
+type Falsy =
+	| 0
+	| ''
+	| false
+	| undefined
+	| null
+	| never[]
+	| { [key: string]: never };
+
+type IsNotFalsy<T> = T extends Falsy ? false : true;
+
+type AnyOf<T extends any[]> = T extends [infer Head, ...infer Rest]
+	? IsNotFalsy<Head> extends true
+		? true
+		: AnyOf<Rest>
+	: false;
+```
+
+</details>
+
+### [1042. IsNever](https://github.com/type-challenges/type-challenges/blob/main/questions/01042-medium-isnever/README.md)
+
+- 아래의 코드를 작성해보고, 결과를 이해한 후 문제를 풀어보자.
+
+```ts
+type IsNever1 = never extends never ? true : false;
+type IsNever2<T> = T extends never ? true : false;
+
+type T1 = IsNever1; // 🙄 ???
+type T2 = IsNever2<never>; // 🙄 ???
+```
+
+<details>
+<summary>정리</summary>
+
+- `T1`과 `T2` 타입의 결과가 모두 true일 것 같지만, `T2`는 `never` 타입이 할당된다.
+- 관련 [Issue](https://github.com/microsoft/TypeScript/issues/31751#issuecomment-498526919)를 확인해보자.
+
+```ts
+type IsNever<T> = [T] extends [never] ? true : false;
+```
+
+</details>
