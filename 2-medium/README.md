@@ -423,3 +423,55 @@ type IsNever<T> = [T] extends [never] ? true : false;
 ```
 
 </details>
+
+### [1130. ReplaceKeys](https://github.com/type-challenges/type-challenges/blob/main/questions/01130-medium-replacekeys/README.md)
+
+- 아래 코드를 직접 작성해본 뒤, `Foo<VList>`의 결과를 예측해보자.
+
+```ts
+type V1 = { x: 1 };
+type V2 = { x: 1; y: 2 };
+type V3 = { x: 1; y: 2; z: 3 };
+
+type VList = V1 | V2 | V3;
+
+type Foo<T> = {
+	[key in keyof T]: T[key];
+};
+
+// 🙄 what is this?
+type T = Foo<VList>;
+```
+
+<details>
+<summary>정리</summary>
+
+- `Foo<VList>`는 `Foo<V1> | Foo<V2> | Foo<V3>`로 평가된다.
+
+```ts
+type ReplaceKeys<U, T, Y> = {
+	[key in keyof U]: key extends T
+		? key extends keyof Y
+			? Y[key]
+			: never
+		: U[key];
+};
+```
+
+</details>
+
+### [1367. Remove Index Signature](https://github.com/type-challenges/type-challenges/blob/main/questions/01367-medium-remove-index-signature/README.md)
+
+- 직관적으로 해법이 떠오르지 않는다.
+- 어렵다면 풀이를 보고 다시 풀어보자!..
+
+<details>
+<summary>정리</summary>
+
+```ts
+type RemoveIndexSignature<T extends object> = {
+	[key in keyof T as key extends `${infer S}` ? S : never]: T[key];
+};
+```
+
+</details>
