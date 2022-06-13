@@ -475,3 +475,35 @@ type RemoveIndexSignature<T extends object> = {
 ```
 
 </details>
+
+### [4803. Trim Right](https://github.com/type-challenges/type-challenges/blob/main/questions/04803-medium-trim-right/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type TrimMatch = `\n` | `\t` | ' ';
+
+type TrimRight<S extends string> = S extends `${infer R}${TrimMatch}`
+	? TrimRight<`${R}`>
+	: S;
+```
+
+</details>
+
+### [5117. Without](https://github.com/type-challenges/type-challenges/blob/main/questions/05117-medium-without/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type ToUnion<T> = T extends unknown[] ? T[number] : T;
+
+type Without<T extends unknown[], U> = T extends [infer F, ...infer R]
+	? F extends ToUnion<U>
+		? Without<R, U>
+		: [F, ...Without<R, U>]
+	: [];
+```
+
+</details>
