@@ -507,3 +507,44 @@ type Without<T extends unknown[], U> = T extends [infer F, ...infer R]
 ```
 
 </details>
+
+### [5140. Trunc](https://github.com/type-challenges/type-challenges/blob/main/questions/05140-medium-trunc/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Trunc<T extends number | string> = `${T}` extends `${infer F}.${infer L}`
+	? F
+	: `{T}`;
+```
+
+</details>
+
+### [5153. IndexOf](https://github.com/type-challenges/type-challenges/blob/main/questions/05153-medium-indexof/README.md)
+
+- 제네릭을 통해 인덱스를 카운팅 할 방법을 고민해보자.
+- 어떻게 두 타입이 동일한 level의 타입이라고 비교할 수 있을까?
+  - 관련 [Issue](https://github.com/microsoft/TypeScript/issues/27024)를 한 번 살펴보자..
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+	? 1
+	: 2
+	? true
+	: false;
+
+type IndexOf<T extends unknown[], U, L extends unknown[] = []> = T extends [
+	infer HEAD,
+	...infer REST,
+]
+	? Equal<HEAD, U> extends true
+		? L['length']
+		: IndexOf<REST, U, [...L, 0]>
+	: -1;
+```
+
+</details>
