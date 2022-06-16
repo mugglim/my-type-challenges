@@ -548,3 +548,39 @@ type IndexOf<T extends unknown[], U, L extends unknown[] = []> = T extends [
 ```
 
 </details>
+
+### [5310. Join](https://github.com/type-challenges/type-challenges/blob/main/questions/05310-medium-join/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Join<T extends unknown[], U extends number | string> = T extends [infer HEAD extends string | number, ...infer REST]
+  ? REST extends []
+    ? HEAD
+    : `${HEAD}${U}${Join<REST, U>}`
+  : never
+```
+
+</details>
+
+### [5310. LastIndexOf](https://github.com/type-challenges/type-challenges/blob/main/questions/05317-medium-lastindexof/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+	? 1
+	: 2
+	? true
+	: false;
+
+type LastIndexOf<T extends unknown[], U> = T extends [...infer REST, infer TAIL]
+	? Equal<TAIL, U> extends true
+		? REST['length']
+		: LastIndexOf<REST, U>
+	: -1;
+```
+
+</details>
