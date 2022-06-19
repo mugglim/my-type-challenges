@@ -584,3 +584,27 @@ type LastIndexOf<T extends unknown[], U> = T extends [...infer REST, infer TAIL]
 ```
 
 </details>
+
+### [5360. Unique](https://github.com/type-challenges/type-challenges/blob/main/questions/05360-medium-unique/README.md)
+
+<details>
+<summary>정리</summary>
+
+```ts
+type Include<T extends unknown[], U> = T extends [infer HEAD, ...infer REST]
+	? Equal<HEAD, U> extends true
+		? true
+		: Include<REST, U>
+	: false;
+
+type Unique<T extends unknown, U extends unknown[] = []> = T extends [
+	infer HEAD,
+	...infer REST,
+]
+	? Include<U, HEAD> extends true
+		? Unique<REST, U>
+		: Unique<REST, [...U, HEAD]>
+	: U;
+```
+
+</details>
